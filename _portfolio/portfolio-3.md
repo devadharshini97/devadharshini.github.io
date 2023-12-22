@@ -1,6 +1,6 @@
 ---
-title: "Deepfake Detection Model"
-excerpt: "Implemented two approaches, utilizing Xceptionet and metric learning, to achieve higher accuracy in classifying low-resolution videos. Developed a model employing MTCNNs to distinguish between authentic and manipulated videos, achieving an initial accuracy of 92%. Further enhanced accuracy by 10% on low-resolution videos through the integration of metric learning techniques.<br/>"
+title: "Attribute-Based Image Manipulation with Conditional Variational Autoencoder"
+excerpt: "In this project, I implemented a Conditional Variational Autoencoder (CVAE) to encode and manipulate images from the CelebA dataset, comprising over 200,000 celebrity images with 40 face attributes. The CVAE, designed with specific preprocessing steps, encoder architecture, and decoder components, aimed to generate realistic reconstructions while considering attribute changes. Tasks included manipulating images based on attribute vectors and smoothly morphing between two images through linear interpolation in the latent space, showcasing the model's versatility in image generation and manipulation.<br/>"
 ---
 
 In this project, I developed a Conditional Variational Autoencoder (CVAE) to encode and manipulate images from the CelebA dataset. The dataset comprises over 200,000 celebrity images, each annotated with 40 binary face attributes such as gender, smile, and glasses. My objective was to implement a CVAE capable of encoding these attributes and generating realistic image reconstructions.
