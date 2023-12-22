@@ -21,13 +21,17 @@ Reconstruction Loss: I applied Mean Squared Error as the reconstruction loss.
 
 Task 2 involved using the trained CVAE to manipulate images by changing the attribute vector input. I encoded images from the test set, specified new attributes, and decoded the mean vectors combined with the new attributes using the pre-trained decoder. Examples of manipulations included converting non-smiling faces to smiling, non-mustached to mustached, and non-glass-wearing to glass-wearing.
 ![original_dataset](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/7da2bd2a-4e45-44a0-833b-40d15ea62977)
+
 *Figure 1: Original Dataset*
 
 ![Manipulated_faces_with_glass](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/09a39f56-c721-4174-8d70-28f266824b58)
+
 *Figure 2: Manipulated Faces with Glasses*
 
 Task 3 focused on slowly morphing one image into another using linear interpolation in the latent space. By obtaining the mean vectors of two images, I linearly moved along the interpolation vector to generate new samples that represented a smooth transition between the original images.
 
 ![Image_morphing](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/8a37c5fe-5331-4e5b-afd3-a1e9aa9e57f1)
+
 *Figure 3: Image Morphing*
+
 The project showcased my proficiency in implementing a CVAE for image manipulation and demonstrated the model's ability to generate diverse and realistic image reconstructions based on attribute changes and linear interpolation in the latent space.
