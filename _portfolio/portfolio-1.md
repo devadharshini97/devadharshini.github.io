@@ -1,6 +1,6 @@
 ---
 title: "3D Tumor Segmentation"
-excerpt: "Implemented advanced 3D tumor segmentation with UnetR architecture, leveraging a fusion of ViT and Unet for enhanced tumor class localization. Visualized and rendered the algorithm's predictions in three dimensions for comprehensive analysis.<br/><img src='/images/3d_tumor_segmentation.png'>"
+excerpt: "Implemented advanced 3D tumor segmentation with UnetR architecture, leveraging a fusion of ViT and Unet for enhanced tumor class localization. Visualized and rendered the algorithm's predictions in three dimensions for comprehensive analysis.<br/><img src='/images/500x300.png'>"
 collection: portfolio
 ---
 
