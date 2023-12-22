@@ -1,5 +1,5 @@
 ---
-title: "3D Tumor Segmentation"
+title: "3D Tumor Segmentation part 2"
 excerpt: "Implemented advanced 3D tumor segmentation with UnetR architecture, leveraging a fusion of ViT and Unet for enhanced tumor class localization. Visualized and rendered the algorithm's predictions in three dimensions for comprehensive analysis.<br/><img src='/images/3d_tumor_segmentation.png'>"
 collection: portfolio
 ---
@@ -9,6 +9,21 @@ collection: portfolio
     architecture, optimizing its performance for accurate segmentation. Additionally, investigated the application of an
     attention-based feature extractor using Unetr for enhanced 3D brain tumor segmentation. To facilitate easy visual
     analysis, generated cloud point visualizations of both predictions and ground truth.</p>
-<p><video controls>
+<figure>
+        <div class="video-container">
+                      <video controls>
+                        <source src="/images/Predicted_label_visualization.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                      <video controls>
+                        <source src="/images/Original_label_visualization.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <div class="caption-container">
+                        <figcaption>Point clouds of Model prediction and ground truth of brain tumor sub-regions</figcaption>
+                    </div>
+                </figure>
+<!-- <p><video controls>
   <source src="/images/Predicted_label_visualization.mp4" type="video/mp4">
-</video></p>
+</video></p> -->
