@@ -1,12 +1,16 @@
 ---
-title: "3D Tumor Segmentation"
-excerpt: "Implemented advanced 3D tumor segmentation with UnetR architecture, leveraging a fusion of ViT and Unet for enhanced tumor class localization. Visualized and rendered the algorithm's predictions in three dimensions for comprehensive analysis.<br/><img src='/images/500x300.png'>"
-collection: portfolio
+title: "Deepfake Detection Model"
+excerpt: "Implemented two approaches, utilizing Xceptionet and metric learning, to achieve higher accuracy in classifying low-resolution videos. Developed a model employing MTCNNs to distinguish between authentic and manipulated videos, achieving an initial accuracy of 92%. Further enhanced accuracy by 10% on low-resolution videos through the integration of metric learning techniques.<br/>"
 ---
 
-Conducted comprehensive data analysis, preprocessing, and partitioning of the BRaTS2021 dataset to facilitate the creation of a 3D tumor segmentation algorithm through deep learning. Implemented training procedures for the Vnet architecture, optimizing its performance for accurate segmentation. Additionally, investigated the application of an attention-based feature extractor using Unetr for enhanced 3D brain tumor segmentation. To facilitate easy visual analysis, generated cloud point visualizations of both predictions and ground truth.
+In response to the escalating threat of deepfake technology and its potential misuse in disinformation and propaganda, our project focuses on developing robust methods for deepfake detection. Leveraging Multitask Cascaded CNNs (MTCNN), FaceNet, and metric learning, we devised a comprehensive approach to discern authentic from manipulated videos. Our work explores deep learning strategies in the context of deepfake classification, particularly in high compression scenarios, demonstrating the effectiveness of metric learning in this challenging task.
 
-![3d_tumor_segmentation](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/f4b41b21-ca7a-48a7-acba-aa13e083b8ba)
+By utilizing fewer frames per video to assess realism, our metric learning approach, employing a triplet network architecture, proves fruitful. This innovative technique enhances the feature space distance between clusters of real and fake video embedding vectors. Validation on Celeb-DF and Celeb-DF-v2 datasets, which include interviews of 52 celebrities on YouTube, showcased the adaptability of our methods across diverse environments.
 
-https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/8c04904d-18d4-4c53-9320-7c42a30353e4
+The training process involved approximately 30,000 images with equal distribution between manipulated and original images, and categorical labels denoting real or manipulated. Employing semi-hard triplet loss, our model considered 25 frames per video, generating 512 face embedding vectors using FaceNet. The network trained with triplet loss served as input for classifiers such as KNN, SGD, and Random Forest, achieving high accuracy in real vs. fake face classification.
 
+Comparing architectures, we found that our model, consisting of MTCNN followed by FaceNet with triplet loss and two classifiers (SGD and Random Forest), outperformed the XceptionNet. We successfully addressed the challenges of spatio-temporal learning and low accuracy associated with convolution-based networks like XceptionNet.
+
+Our model's ability to accurately classify real and fake faces was evident in achieving a testing accuracy of 87%. During testing, video frames were processed, predictions made on features extracted from 25 frames, and the mean used for final classification output. In summary, our innovative approach, combining MTCNN, FaceNet, and metric learning, offers a powerful solution for the detection of deepfake videos, showcasing superior accuracy and resilience against various challenges.
+
+![deep_fake](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/4956ac25-f7d9-4a1b-810c-a3faf67ac7c5)
