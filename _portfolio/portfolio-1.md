@@ -5,6 +5,5 @@ collection: portfolio
 ---
 
 Conducted comprehensive data analysis, preprocessing, and partitioning of the BRaTS2021 dataset to facilitate the creation of a 3D tumor segmentation algorithm through deep learning. Implemented training procedures for the Vnet architecture, optimizing its performance for accurate segmentation. Additionally, investigated the application of an attention-based feature extractor using Unetr for enhanced 3D brain tumor segmentation. To facilitate easy visual analysis, generated cloud point visualizations of both predictions and ground truth.
-![Model Predictions of the Tumor sub-regions](/images/3d_tumor_segmentation.png)
 
-
+![3d_tumor_segmentation](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/f4b41b21-ca7a-48a7-acba-aa13e083b8ba)
