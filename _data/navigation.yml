@@ -5,18 +5,21 @@ main:
     #url: /cv/
     url: /files/Devadharshini_9_v5.pdf
 
+  - title: "Projects"
+    url: /portfolio/
+
+  - title: "Experience"
+  # - title: "Teaching"
+    url: /teaching/
+
+  - title: "Certifications"
+# - title: "Talks"
+    url: /talks/
+  
   - title: "Publications"
     url: /publications/
 
-  # - title: "Talks"
-  #   url: /talks/    
-
-  # - title: "Teaching"
-  #   url: /teaching/    
-    
-  - title: "Projects"
-    url: /portfolio/
-        
+  #- title: "Notes"      
   # - title: "Blog Posts"
   #   url: /year-archive/
     
