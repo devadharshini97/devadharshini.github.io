@@ -19,5 +19,7 @@ redirect_from:
 I am actively seeking full-time opportunities beginning Summer 2024 and internship opportunities for Spring 2024. My expertise and interests lie in the following areas:
 
 Machine Learning
+
 Computer Vision/ Image Processing
+
 3D Reconstruction
