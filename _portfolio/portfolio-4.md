@@ -9,4 +9,8 @@ The project involved preprocessing the dataset by removing noise, including HTML
 
 Deliverables for this project include a plot illustrating the loss values across epochs during training. Additionally, the LSTM model was utilized to generate a 100-word text, starting with the seed phrase 'his natural shyness was overcome'. This generation process involved predicting the 6th word successively in a loop based on the previous 5 words.
 
+![lstm_plot](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/7db540f5-9076-4231-97f4-a444ea28f6d0)
+
 The project not only demonstrated proficiency in implementing LSTM models for sequence prediction but also showcased the generation of coherent text based on learned patterns from the training dataset.
+
+![lstm_text](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/47dcd21d-3a7a-4159-ace7-3a648ddc8b2b)
