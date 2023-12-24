@@ -19,4 +19,4 @@ The results indicate the effectiveness of oversampling techniques in addressing 
 
 The project contributes insights into optimizing fraud detection in imbalanced datasets through a combination of resampling methods and advanced machine learning models.
 
-The project report and source code can be found: [Click Here](https://github.com/devadharshini97/Credit_card_fraud_detection)
+The project report and source code can be found here: [Click Me](https://github.com/devadharshini97/Credit_card_fraud_detection)
