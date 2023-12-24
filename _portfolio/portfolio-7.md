@@ -3,36 +3,23 @@ title: "Single View Metrology Implementation"
 excerpt: "Implementing the ICCV99 paper, this project extracts 3D geometry from a single perspective image through annotated line analysis, vanishing point computation, projection matrix derivation, and generation of texture maps for immersive 3D model visualization.<br/>"
 ---
 
-## Project Overview:
-This project involves the implementation of the "Single View Metrology" paper by Criminisi, Reid, and Zisserman (ICCV99). The objective is to compute aspects of the affine 3D geometry of a scene from a single perspective image with prior knowledge. The implementation encompasses four main tasks:
+## Project Description:
+For the "Random Processes" course final project, I implemented a GUI application to visualize the simulation, transformation, and convergence of random variables, exploring key statistical concepts.
 
-### Image Acquisition:
+### Random Variable Simulation:
 
-Captured a 3-point perspective image as input, following the guidelines of three-point perspective.
-The input image is annotated to identify box vertices, essential for subsequent calculations.
+Generated random variables from diverse distributions (normal, uniform, exponential) using MATLAB routines and envelope rejection methods.
+Computed and compared mean and variance for simulated distributions, assessing variance between simulated and theoretical values.
 
-### Computing Vanishing Points:
+### Transformation and Convergence:
 
-Annotated image lines are utilized to compute vanishing points using vector cross products.
-Three vanishing points (Vx, Vy, Vz) are obtained with respect to the x, y, and z-coordinate systems.
+Transformed X random variates for different distributions (normal, uniform, exponential) with varying sample sizes (100, 1000, 10000).
+Investigated modes of convergence (Mean Square, Almost Sure, Probability, Distribution) to comprehend the law of large numbers.
 
-### Projection Matrix and Homograph Matrix Computation:
+### GUI Visualization:
 
-The projection matrix is calculated using vanishing points, with scaling factors determined from reference coordinates.
-Homograph matrices (Hxy, Hyz, Hxz) are derived from the projection matrix for XY, YZ, and ZX planes.
+Developed a graphical user interface (GUI) to illustrate the convergence of Y random variates towards their mean.
+Showcased convergences including Probability, Almost Sure, Mean Square, and Distribution convergence.
+Demonstrated the Weak Law of Large Numbers for X variates within the same interactive GUI environment.
 
-### Texture Maps and 3D Model Visualization:
-
-Texture maps for XY, YZ, and XZ planes are created using reverse warping based on homograph matrices.
-The project culminates in visualizing a reconstructed 3D model using Blender.
-
-## Result:
-The successful implementation of the "Single View Metrology" paper demonstrates the ability to extract meaningful 3D geometry from a single perspective image, with a clear focus on accuracy and robustness in annotation, computation, and visualization.
-![annotated_box_image](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/f4885274-8d99-4971-9b9e-e092396b6b51)
-*Original Image*
-![annotated_image](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/a4ac9419-7bdf-44ba-b285-724f5b7534dc)
-*Annotated Image*
-![blender_image1](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/3c561e1a-e680-4588-93d0-d3fdbb8bdcd1)
-*Blender Image*
-
-
+This project not only delves into the practical application of random processes but also provides an interactive tool for visually grasping the convergence behaviors of transformed random variables, contributing to a deeper understanding of statistical principles.
