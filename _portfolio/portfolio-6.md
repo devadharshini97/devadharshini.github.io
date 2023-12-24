@@ -28,6 +28,11 @@ The project culminates in visualizing a reconstructed 3D model using Blender.
 
 ## Result:
 The successful implementation of the "Single View Metrology" paper demonstrates the ability to extract meaningful 3D geometry from a single perspective image, with a clear focus on accuracy and robustness in annotation, computation, and visualization.
-
+![annotated_box_image](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/f4885274-8d99-4971-9b9e-e092396b6b51)
+*Original Image*
+![annotated_image](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/a4ac9419-7bdf-44ba-b285-724f5b7534dc)
+*Annotated Image*
+![blender_image1](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/3c561e1a-e680-4588-93d0-d3fdbb8bdcd1)
+*Blender Image*
 
 
