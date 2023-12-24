@@ -10,3 +10,6 @@ Addressing the rising need for advanced security solutions, the Cloud-Based Came
 
 ## Implementation:
 For the initial phase, the project implemented a key technical requirement: achieving 99% system availability. This was accomplished by utilizing Amazon EKS, creating nodes, deploying pods, connecting to a load balancer, and conducting load testing with Locust. Additionally, Horizontal Pod Autoscaling (HPA) was applied to dynamically scale resources based on varying load conditions. This successful implementation marks a crucial step in fulfilling the broader objectives of the Cloud-Based Camera Security System.
+![CC1](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/0117299b-3034-4dff-ba83-3faab7517c2d)
+![CC2](https://github.com/devadharshini97/devadharshini.github.io/assets/41442650/e64e948b-e499-4e9b-bbbf-48890b290d28)
+
