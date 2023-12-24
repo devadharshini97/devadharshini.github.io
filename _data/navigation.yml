@@ -19,9 +19,9 @@ main:
   - title: "Publications"
     url: /publications/
 
-  #- title: "Notes"      
+  - title: "Achievements and Interests"      
   # - title: "Blog Posts"
-  #   url: /year-archive/
+    url: /year-archive/
     
 
     
