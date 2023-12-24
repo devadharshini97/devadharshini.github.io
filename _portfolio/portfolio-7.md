@@ -1,6 +1,6 @@
 ---
-title: "Single View Metrology Implementation"
-excerpt: "Implementing the ICCV99 paper, this project extracts 3D geometry from a single perspective image through annotated line analysis, vanishing point computation, projection matrix derivation, and generation of texture maps for immersive 3D model visualization.<br/>"
+title: "Random Variables Exploration and Convergence Visualizer"
+excerpt: "Experience the dynamics of random variables through the simulation of diverse distributions and witness their convergence behaviors in an interactive GUI. This project offers a comprehensive exploration of statistical concepts, including the Central Limit Theorem and the Law of Large Numbers.<br/>"
 ---
 
 ## Project Description:
