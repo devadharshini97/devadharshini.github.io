@@ -10,9 +10,9 @@ redirect_from:
 
 👨🏻‍💻 I'm a final year graduate student at NC State University.
 
-📚  My academic pursuits revolve around Machine Learning, Computer Vision, and Co-operative V2X Perception.
+📚  My academic pursuits revolve around Machine Learning, Computer Vision, Deep Learning and 3D Geometry.
 
-🔬 Within the realm of research, I am currently engrossed in my Master's Thesis, exploring 3D Reconstruction through the application of Neural Radiance Fields (NeRF) and emphasizing multi-view geometry. My work involves optimizing camera poses to intricately enhance the quality of reconstructions.
+🔬 Within the realm of research, I am currently engrossed in my **Master's Thesis**, exploring 3D Reconstruction through the application of ***Neural Radiance Fields (NeRF)*** and emphasizing ***multi-view geometry***. My work involves optimizing camera poses to intricately enhance the quality of reconstructions.
 
 ## 🔍 Looking for Opportunities
 
