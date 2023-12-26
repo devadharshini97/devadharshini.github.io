@@ -16,7 +16,7 @@ redirect_from:
 
 ## 🔍 Looking for Opportunities
 
-I am actively seeking **Full-time opportunities beginning Summer 2024** and internship opportunities for Spring 2024. My expertise and interests lie in the following areas:
+I am actively seeking **Full-time opportunities beginning May 2024** and internship opportunities for Spring 2024. My expertise and interests lie in the following areas:
 
 Machine Learning
 
