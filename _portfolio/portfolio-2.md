@@ -1,5 +1,5 @@
 ---
-title: "Deepfake Detection Model"
+title: "Deepfake Detection Model "
 excerpt: "Implemented two approaches, utilizing Xceptionet and metric learning, to achieve higher accuracy in classifying low-resolution videos. Developed a model employing MTCNNs to distinguish between authentic and manipulated videos, achieving an initial accuracy of 92%. Further enhanced accuracy by 10% on low-resolution videos through the integration of metric learning techniques.<br/>"
 ---
 
