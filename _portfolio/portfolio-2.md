@@ -2,7 +2,7 @@
 title: "Deepfake Detection Model "
 excerpt: "Implemented two approaches, utilizing Xceptionet and metric learning, to achieve higher accuracy in classifying low-resolution videos. Developed a model employing MTCNNs to distinguish between authentic and manipulated videos, achieving an initial accuracy of 92%. Further enhanced accuracy by 10% on low-resolution videos through the integration of metric learning techniques.<br/>"
 ---
-
+vv
 In response to the escalating threat of deepfake technology and its potential misuse in disinformation and propaganda, our project focuses on developing robust methods for deepfake detection. Leveraging Multitask Cascaded CNNs (MTCNN), FaceNet, and metric learning, we devised a comprehensive approach to discern authentic from manipulated videos. Our work explores deep learning strategies in the context of deepfake classification, particularly in high compression scenarios, demonstrating the effectiveness of metric learning in this challenging task.
 
 By utilizing fewer frames per video to assess realism, our metric learning approach, employing a triplet network architecture, proves fruitful. This innovative technique enhances the feature space distance between clusters of real and fake video embedding vectors. Validation on Celeb-DF and Celeb-DF-v2 datasets, which include interviews of 52 celebrities on YouTube, showcased the adaptability of our methods across diverse environments.
