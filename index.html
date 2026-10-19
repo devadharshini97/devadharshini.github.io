@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devadharshini Ayyappan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Devadharshini Ayyappan, PhD student at NC State working on physically grounded 3D/4D reconstruction with Gaussian splatting and differentiable simulation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one 860px reading column, left-aligned. Sticky anchor nav; hero = bio left + splat-rendered portrait right;
+   research rows in the Barron pattern (thumbnail left, text right, hover plays video). */
+:root {
+  --bg: #F5F7F9;          /* cool paper */
+  --fg: #1B232B;          /* ink */
+  --muted: #5A6672;       /* secondary text */
+  --rule: #DDE3E8;        /* hairlines */
+  --accent: #1D5F8F;      /* deep water blue: links */
+  --mark: #E9EFF4;        /* row hover / chips */
+  --warm: #B4652A;        /* date stamps, used sparingly */
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --step--1: 0.8125rem; --step-0: 0.96875rem; --step-1: 1.125rem; --step-2: 1.5rem; --step-4: 2.6rem;
+  --col: 860px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --warm: #E3A06B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --warm: #E3A06B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.wrap {
+  max-width: var(--col); margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 12px; }
+.nav .mono { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; color: var(--fg); margin-right: auto; white-space: nowrap; }
+.nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+.nav ul::-webkit-scrollbar { display: none; }
+.nav li a { color: var(--muted); font-size: var(--step--1); font-weight: 500; white-space: nowrap; }
+.nav li a:hover, .nav li a.on { color: var(--fg); text-decoration: none; }
+.theme-btn {
+  flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--rule);
+  background: transparent; color: var(--muted); cursor: pointer; display: grid; place-items: center;
+}
+.theme-btn:hover { color: var(--fg); }
+.theme-btn svg { width: 16px; height: 16px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 44px; align-items: start; padding-block: 56px 28px; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 500; font-size: var(--step-4); line-height: 1.05;
+  letter-spacing: -0.01em; margin: 0 0 6px; text-wrap: balance;
+}
+.hero .role { color: var(--muted); margin: 0 0 22px; font-size: var(--step-0); }
+.hero p { margin: 0 0 14px; max-width: 62ch; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; font-size: var(--step--1); font-weight: 500; }
+.portrait { position: relative; width: 240px; aspect-ratio: 1; max-width: 100%; }
+.portrait img, .portrait canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 6px; }
+.portrait img { object-fit: cover; opacity: 0; transition: opacity 900ms ease; }
+.portrait.done img { opacity: 1; }
+.portrait canvas { cursor: crosshair; }
+.portrait figcaption { position: absolute; top: calc(100% + 8px); left: 0; right: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+.reduce .portrait img { opacity: 1; transition: none; }
+
+/* sections */
+section { padding-block: 28px; border-top: 1px solid var(--rule); }
+h2 {
+  font-family: var(--font-display); font-weight: 500; font-size: var(--step-2);
+  margin: 0 0 18px; letter-spacing: -0.005em;
+}
+.topics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin: 0; padding: 0; list-style: none; }
+.topics li { min-width: 0; }
+.topics strong { display: block; font-weight: 600; margin-bottom: 4px; }
+.topics span { color: var(--muted); font-size: var(--step--1); line-height: 1.55; display: block; }
+
+/* news */
+.news { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.news li { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 12px; }
+.news time { color: var(--warm); font-variant-numeric: tabular-nums; font-size: var(--step--1); font-weight: 500; padding-top: 2px; }
+
+/* research rows (Barron pattern) */
+.rows { display: grid; gap: 6px; }
+.row {
+  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: start;
+  padding: 14px; margin-inline: -14px; border-radius: 6px;
+}
+.row:hover { background: var(--mark); }
+.thumb { position: relative; width: 200px; max-width: 100%; aspect-ratio: 16 / 10; border-radius: 4px; overflow: hidden; background: var(--mark); }
+.thumb img, .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.thumb video { opacity: 0; transition: opacity 200ms; background: #fff; object-fit: cover; }
+.row:hover .thumb video.ready { opacity: 1; }
+.row h3 { font-size: var(--step-0); font-weight: 600; margin: 0 0 4px; line-height: 1.4; }
+.row h3 a { color: var(--fg); }
+.row .authors { font-size: var(--step--1); color: var(--muted); margin: 0 0 2px; }
+.row .authors b { color: var(--fg); font-weight: 600; }
+.row .venue { font-size: var(--step--1); margin: 0 0 6px; font-style: italic; color: var(--muted); }
+.row .venue em { font-style: normal; font-weight: 600; color: var(--fg); }
+.row p.desc { margin: 0 0 6px; font-size: var(--step--1); line-height: 1.6; }
+.row .lk { font-size: var(--step--1); font-weight: 500; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.status { display: inline-block; font-size: 0.72rem; font-weight: 600; color: var(--warm); border: 1px solid currentColor; border-radius: 3px; padding: 0 5px; margin-left: 6px; vertical-align: 1px; }
+
+.compact { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; font-size: var(--step--1); }
+.compact b { font-weight: 600; }
+.compact .t { color: var(--fg); font-weight: 500; }
+.compact .m { color: var(--muted); }
+
+/* experience / education */
+.xp { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.xp li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; }
+.xp .org { font-weight: 600; }
+.xp .when { color: var(--muted); font-size: var(--step--1); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.xp .what { grid-column: 1 / -1; color: var(--muted); font-size: var(--step--1); }
+
+footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var(--muted); font-size: 0.78rem; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 36px; }
+  .hero .portrait { order: -1; width: 168px; }
+  .portrait figcaption { display: none; }
+  .topics { grid-template-columns: 1fr; gap: 14px; }
+  .row { grid-template-columns: 1fr; gap: 12px; }
+  .thumb { width: 100%; }
+  .nav .mono { display: none; }
+  .nav .wrap { gap: 12px; }
+  .news li { grid-template-columns: 70px minmax(0, 1fr); }
+}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="mono" href="#top">D. Ayyappan</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch color theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero" id="about">
+    <div>
+      <h1>Devadharshini Ayyappan</h1>
+      <p class="role">PhD student, Electrical Engineering, North Carolina State University</p>
+      <p>I work on physically grounded 3D and 4D reconstruction. I want to recover how deformable and articulated objects look, how they move, and what they are made of. My work combines Gaussian splatting, differentiable physics simulation, and multi-view sensing hardware.</p>
+      <p>I am advised by Prof. Edgar Lobaton in the ARoS Lab. In summer 2026 I was a research intern at Dolby Laboratories, extending multi-part triplane Gaussian splatting to non-rigid deformation. Before my PhD I spent three years as a software engineer at Bosch.</p>
+      <p>I am open to industry research and engineering roles in 3D reconstruction and computer vision.</p>
+      <div class="links">
+        <a href="assets/Devadharshini_Ayyappan_CV.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="https://scholar.google.com/citations?user=ZP6H1J8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://github.com/devadharshini97" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/devadharshini-ayyappan-302282103/" target="_blank" rel="noopener">LinkedIn</a>
+        <span style="color:var(--muted)">dayyapp [at] ncsu.edu</span>
+      </div>
+    </div>
+    <figure class="portrait" id="portrait" style="margin:0">
+      <img src="assets/profile.jpg" alt="Portrait of Devadharshini Ayyappan" width="480" height="480">
+      <canvas id="splat" aria-hidden="true"></canvas>
+      <figcaption>Drawn as 2D Gaussians, coarse to fine. Hover to redraw.</figcaption>
+    </figure>
+  </header>
+
+  <section aria-labelledby="h-topics" style="border-top:0; padding-top:12px">
+    <h2 id="h-topics" style="position:absolute;left:-9999px">Research topics</h2>
+    <ul class="topics">
+      <li><strong>Non-rigid Gaussian splatting</strong><span>Articulated and deformable objects with part-aware triplane representations and learned residual deformation.</span></li>
+      <li><strong>Inverse physics from video</strong><span>Estimating material parameters by fitting differentiable MPM simulation (NVIDIA Warp, Newton) to observed motion.</span></li>
+      <li><strong>Sensing systems</strong><span>Multi-camera and IMU rigs for long-term monitoring of freshwater mussels in lab tanks.</span></li>
+    </ul>
+  </section>
+
+  <section id="news" aria-labelledby="h-news">
+    <h2 id="h-news">News</h2>
+    <ul class="news">
+      <li><time datetime="2026-08">Aug 2026</time><span>Finished my research internship at <b>Dolby Laboratories</b> on non-rigid multi-part triplane Gaussian splatting.</span></li>
+      <li><time datetime="2026-05">May 2026</time><span>Started as a research intern at Dolby Laboratories in Atlanta.</span></li>
+      <li><time datetime="2025-11">Nov 2025</time><span>Our review of machine learning for nematode microscopy was published in <i>AgriEngineering</i>.</span></li>
+      <li><time datetime="2025-06">Jun 2025</time><span>Our paper on an accessible 3D imaging system for mussel monitoring appeared at <i>ASEE 2025</i>.</span></li>
+      <li><time datetime="2025-05">May 2025</time><span>Joined Mithril Defense as a 3D reconstruction intern working on LiDAR–camera reconstruction.</span></li>
+      <li><time datetime="2024-08">Aug 2024</time><span>Transferred from the M.S. to the Ph.D. program at NC State.</span></li>
+    </ul>
+  </section>
+
+  <section id="research" aria-labelledby="h-research">
+    <h2 id="h-research">Research</h2>
+    <div class="rows">
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/deform.svg" alt="Two-part object drawn as Gaussians, with the back part bending" loading="lazy"></div>
+        <div>
+          <h3>Non-Rigid Multi-Part Triplane Gaussian Splatting</h3>
+          <p class="venue">Research internship, Dolby Laboratories, 2026</p>
+          <p class="desc">Extends multi-part triplane Gaussian splatting from rigid articulation to non-rigid deformation. Soft boundary blending between parts and a learned residual deformation module model bending and stretching beyond rigid joint transforms. Evaluated on a new Blender dataset of deformable articulated objects, where it improves reconstruction and deformation fidelity over rigid multi-part baselines.</p>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/mpm.svg" alt="Particle beam sagging from a fixed wall, colored by stress" loading="lazy"></div>
+        <div>
+          <h3>Learning Physical Parameters from Visual Dynamics <span class="status">Ongoing</span></h3>
+          <p class="authors"><b>Devadharshini Ayyappan</b>, Edgar Lobaton</p>
+          <p class="venue">ARoS Lab, NC State</p>
+          <p class="desc">Converts Gaussian and point-based reconstructions into MPM particles and meshes, then fits material parameters with differentiable simulation in NVIDIA Warp and Newton. Synthetic reference videos of object–force interactions supervise the physical consistency of the result.</p>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/rig.svg" alt="Aquarium tank with four cameras pointed at a mussel" loading="lazy"></div>
+        <div>
+          <h3><a href="https://par.nsf.gov/biblio/10610354" target="_blank" rel="noopener">AI-Driven Mussel Behavior Monitoring Using an Accessible 3D Imaging System</a></h3>
+          <p class="authors">M. Snap, A. Badalamenti, <b>D. Ayyappan</b>, S. Banerjee, D. M. Urieta, C. Cooper, M. Daniele, J. Reynolds, J. Levine, A. Bozkurt, E. Lobaton</p>
+          <p class="venue"><em>ASEE Annual Conference &amp; Exposition</em>, 2025</p>
+          <p class="desc">Low-cost Raspberry Pi and ROS2 capture rigs (underwater, rotating-arm, and rotating-platform) with multi-view calibration and cloud sync. Related work tracks valve gaping with two IMUs and Rodrigues-rotation differential estimation, reaching about 1.9° RMSE on real data.</p>
+          <div class="lk"><a href="https://par.nsf.gov/biblio/10610354" target="_blank" rel="noopener">Paper</a></div>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/nematode.svg" alt="Microscope field with several nematodes" loading="lazy"></div>
+        <div>
+          <h3><a href="https://doi.org/10.3390/agriengineering7110356" target="_blank" rel="noopener">Machine Learning Techniques for Nematode Microscopic Image Analysis: A Systematic Review</a></h3>
+          <p class="authors">J. L. Jimenez, P. Gandhi, <b>D. Ayyappan</b>, A. Gorny, W. Ye, E. Lobaton</p>
+          <p class="venue"><em>AgriEngineering</em> 7(11):356, 2025</p>
+          <div class="lk"><a href="https://doi.org/10.3390/agriengineering7110356" target="_blank" rel="noopener">Paper</a></div>
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/genome.svg" alt="Stylized DNA double helix" loading="lazy"></div>
+        <div>
+          <h3><a href="https://doi.org/10.1101/2025.03.21.644606" target="_blank" rel="noopener">Contextual Science and Genome Analysis for Air-Gapped AI Research</a></h3>
+          <p class="authors">G. R. Lazo, <b>D. Ayyappan</b>, P. K. Sharma, V. K. Tiwari</p>
+          <p class="venue"><em>bioRxiv</em>, 2025</p>
+          <p class="desc">A LangChain and LLM chat interface over a vector database of wheat pan-genomes, built during my USDA ARS internship.</p>
+          <div class="lk"><a href="https://doi.org/10.1101/2025.03.21.644606" target="_blank" rel="noopener">Preprint</a></div>
+        </div>
+      </article>
+    </div>
+    <ul class="compact" aria-label="Other publications">
+      <li><span class="t">Towards a Comprehensive Wheat Pangenome with Web-Based Visualization and Introductory AI.</span> <span class="m">P. K. Sharma, <b>D. Ayyappan</b>, G. Lazo, V. Tiwari. <i>Plant and Animal Genome Conference (PAG 31)</i>, 2024.</span></li>
+    </ul>
+  </section>
+
+  <section id="experience" aria-labelledby="h-xp">
+    <h2 id="h-xp">Experience</h2>
+    <ul class="xp">
+      <li><span class="org">Dolby Laboratories <span style="font-weight:400;color:var(--muted)">· Research Intern</span></span><span class="when">May – Aug 2026</span><span class="what">Non-rigid multi-part triplane Gaussian splatting; synthetic deformable dataset in Blender.</span></li>
+      <li><span class="org">ARoS Lab, NC State <span style="font-weight:400;color:var(--muted)">· Graduate Research Assistant</span></span><span class="when">Apr 2023 – now</span><span class="what">Differentiable physics, NeRF and Gaussian splatting reconstruction, VGGT fine-tuning, Isaac Sim data generation, sensing rigs.</span></li>
+      <li><span class="org">Mithril Defense <span style="font-weight:400;color:var(--muted)">· 3D Reconstruction Intern</span></span><span class="when">May – Aug 2025</span><span class="what">LiDAR–fisheye calibration, Gaussian splatting in Unreal Engine, Marching Cubes meshing from LiDAR.</span></li>
+      <li><span class="org">Robotics88 <span style="font-weight:400;color:var(--muted)">· Computer Vision Co-op</span></span><span class="when">Feb – May 2024</span><span class="what">Real-time camera–LiDAR fusion for drones (Livox Mid-360, ROS); YOLOv8 and YOLO-World benchmarks.</span></li>
+      <li><span class="org">USDA ARS <span style="font-weight:400;color:var(--muted)">· Machine Learning Intern</span></span><span class="when">May – Jul 2023</span><span class="what">LLM and vector-database interface for querying wheat pan-genomes.</span></li>
+      <li><span class="org">Robert Bosch <span style="font-weight:400;color:var(--muted)">· Software Engineer</span></span><span class="when">Sep 2019 – Jul 2022</span><span class="what">Automated software analyzers (30% efficiency gain); powertrain embedded software and HIL testing.</span></li>
+    </ul>
+  </section>
+
+  <section id="projects" aria-labelledby="h-proj">
+    <h2 id="h-proj">Projects</h2>
+    <div class="rows">
+      <article class="row">
+        <div class="thumb"><img src="assets/thumbs/sim2cloud.svg" alt="Pipeline from photo to mesh to rendered frames to cloud" loading="lazy"></div>
+        <div>
+          <h3><a href="https://github.com/devadharshini97/AIMD-Sim-to-Cloud" target="_blank" rel="noopener">Automated Sim-to-Cloud Pipeline for 3D Assets</a></h3>
+          <p class="venue">SAM3D · Isaac Sim Replicator · AWS SageMaker · GitHub Actions</p>
+          <p class="desc">Reconstructs meshes from single images with SAM3D, renders synthetic datasets in Isaac Sim, and runs YOLOv8 inference on SageMaker with S3 storage. Deployment and data sync run through GitHub Actions.</p>
+          <div class="lk"><a href="https://github.com/devadharshini97/AIMD-Sim-to-Cloud" target="_blank" rel="noopener">Code</a></div>
+        </div>
+      </article>
+      <article class="row">
+        <div class="thumb">
+          <img src="assets/thumbs/tumor.jpg" alt="3D point rendering of a segmented brain tumor" loading="lazy">
+          <video src="assets/media/tumor.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </div>
+        <div>
+          <h3><a href="https://github.com/devadharshini97/3D_Brain_Tumor_Segmentation" target="_blank" rel="noopener">3D Brain Tumor Segmentation with UNETR</a></h3>
+          <p class="venue">UNETR · MONAI · PyTorch · Open3D</p>
+          <p class="desc">Volumetric segmentation on BraTS 2021 with a ViT encoder and U-Net decoder, with predictions rendered in 3D.</p>
+          <div class="lk"><a href="https://github.com/devadharshini97/3D_Brain_Tumor_Segmentation" target="_blank" rel="noopener">Code</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="education" aria-labelledby="h-edu">
+    <h2 id="h-edu">Education</h2>
+    <ul class="xp">
+      <li><span class="org">Ph.D., Electrical Engineering <span style="font-weight:400;color:var(--muted)">· North Carolina State University</span></span><span class="when">2024 – now</span><span class="what">Computer vision and machine learning. GPA 4.0/4.0. Transferred from the M.S. program (2022–2024).</span></li>
+      <li><span class="org">B.E., Electronics and Communication Engineering <span style="font-weight:400;color:var(--muted)">· Anna University</span></span><span class="when">2015 – 2019</span><span class="what">CGPA 8.94/10.</span></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Last updated October 2026. Layout inspired by <a href="https://jonbarron.info" target="_blank" rel="noopener">Jon Barron's website</a>.</div>
+</footer>
+
+<script>
+(function () {
+  // Theme toggle (per-viewer preference only)
+  var root = document.documentElement, btn = document.getElementById('themeBtn');
+  try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  btn.addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // Hover-to-play thumbnails
+  document.querySelectorAll('.row').forEach(function (row) {
+    var v = row.querySelector('video'); if (!v) return;
+    v.addEventListener('playing', function () { v.classList.add('ready'); });
+    row.addEventListener('mouseenter', function () { v.play().catch(function () {}); });
+    row.addEventListener('mouseleave', function () { v.pause(); });
+  });
+
+  // Highlight current section in nav
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav li a'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['about', 'news', 'research', 'experience', 'projects', 'education'].forEach(function (id) {
+      var el = document.getElementById(id); if (el) io.observe(el);
+    });
+  }
+
+  // Portrait: splat the photo with anisotropic 2D Gaussians, coarse to fine, then reveal the photo.
+  var fig = document.getElementById('portrait'), img = fig.querySelector('img'), cv = document.getElementById('splat');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { document.body.classList.add('reduce'); cv.remove(); return; }
+  var ctx = cv.getContext('2d'), S = 160, px = null, running = false;
+
+  function sample() {
+    var o = document.createElement('canvas'); o.width = o.height = S;
+    var c = o.getContext('2d'); c.drawImage(img, 0, 0, S, S);
+    try { px = c.getImageData(0, 0, S, S).data; } catch (e) { px = null; }
+  }
+  function at(x, y) { x = Math.max(0, Math.min(S - 1, x | 0)); y = Math.max(0, Math.min(S - 1, y | 0)); return (y * S + x) * 4; }
+  function lum(x, y) { var i = at(x, y); return 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2]; }
+
+  function stage(n, alpha) {
+    var W = cv.width, k = W / S, r0 = S / Math.sqrt(n) * 0.95;
+    for (var j = 0; j < n; j++) {
+      var x = Math.random() * S, y = Math.random() * S, i = at(x, y);
+      // structure tensor over a small window -> edge orientation and coherence
+      var jxx = 0, jyy = 0, jxy = 0, h = Math.max(1, r0 * 0.5);
+      for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
+        var sx = x + dx * h, sy = y + dy * h;
+        var gx = lum(sx + 1, sy) - lum(sx - 1, sy), gy = lum(sx, sy + 1) - lum(sx, sy - 1);
+        jxx += gx * gx; jyy += gy * gy; jxy += gx * gy;
+      }
+      var ang = 0.5 * Math.atan2(2 * jxy, jxx - jyy) + Math.PI / 2;
+      var tr = jxx + jyy, coh = tr > 1e-3 ? Math.sqrt((jxx - jyy) * (jxx - jyy) + 4 * jxy * jxy) / tr : 0;
+      var edge = Math.min(1, tr / 6000);
+      var rx = r0 * (1 + 0.9 * coh) * (1.1 - 0.5 * edge), ry = r0 * (1 - 0.55 * coh) * (1.1 - 0.5 * edge);
+      var col = px[i] + ',' + px[i + 1] + ',' + px[i + 2];
+      ctx.save();
+      ctx.translate(x * k, y * k); ctx.rotate(ang); ctx.scale(rx * k, ry * k);
+      var g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+      g.addColorStop(0, 'rgba(' + col + ',' + alpha + ')');
+      g.addColorStop(0.5, 'rgba(' + col + ',' + (alpha * 0.5) + ')');
+      g.addColorStop(1, 'rgba(' + col + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 1, 0, 6.2832); ctx.fill();
+      ctx.restore();
+    }
+  }
+  function run() {
+    if (running) return;
+    if (!px) { fig.classList.add('done'); return; }
+    running = true; fig.classList.remove('done'); cv.style.transition = 'none'; cv.style.opacity = 1;
+    var d = Math.min(2, window.devicePixelRatio || 1), w = fig.clientWidth * d;
+    cv.width = cv.height = Math.round(w);
+    ctx.fillStyle = getComputedStyle(document.body).backgroundColor; ctx.fillRect(0, 0, cv.width, cv.height);
+    var plan = [[60, .95], [160, .9], [420, .85], [1100, .8], [2600, .75], [5200, .7]], s = 0;
+    (function next() {
+      if (s < plan.length) { stage(plan[s][0], plan[s][1]); s++; setTimeout(function () { requestAnimationFrame(next); }, 260); }
+      else {
+        setTimeout(function () {
+          fig.classList.add('done'); cv.style.transition = 'opacity 900ms ease'; cv.style.opacity = 0;
+          setTimeout(function () { running = false; }, 900);
+        }, 700);
+      }
+    })();
+  }
+  function start() { sample(); run(); }
+  if (img.complete && img.naturalWidth) start(); else img.addEventListener('load', start);
+  fig.addEventListener('mouseenter', run);
+})();
+</script>
+
+</body>
+</html>
