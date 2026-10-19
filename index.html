@@ -19,7 +19,8 @@
   --rule: #DDE3E8;        /* hairlines */
   --accent: #1D5F8F;      /* deep water blue: links */
   --mark: #E9EFF4;
-  --card: #FFFFFF;        /* row hover / chips */
+  --card: #FFFFFF;
+  --open-bg: #EAF4EE; --open-line: #C5E2D0; --open-ink: #1F7A4A;        /* row hover / chips */
   --warm: #B4652A;        /* date stamps, used sparingly */
   --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
@@ -28,12 +29,12 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --warm: #E3A06B;
+    --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --open-bg: #13241B; --open-line: #24412F; --open-ink: #7FD1A3; --warm: #E3A06B;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --warm: #E3A06B;
+  --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --open-bg: #13241B; --open-line: #24412F; --open-ink: #7FD1A3; --warm: #E3A06B;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -82,6 +83,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 }
 .hero .role { color: var(--muted); margin: 0 0 22px; font-size: var(--step-0); }
 .hero p { margin: 0 0 14px; max-width: 62ch; }
+.open-to {
+  display: flex; gap: 10px; align-items: baseline; max-width: 62ch;
+  margin: 18px 0 0 !important; padding: 10px 14px; border-radius: 6px;
+  background: var(--open-bg); border: 1px solid var(--open-line); font-size: var(--step--1); line-height: 1.55;
+}
+.open-to strong { font-weight: 600; color: var(--open-ink); }
+.open-to .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--open-ink); box-shadow: 0 0 0 3px var(--open-line); transform: translateY(-1px); }
 .links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; font-size: var(--step--1); font-weight: 500; }
 .portrait { position: relative; width: 240px; aspect-ratio: 1; max-width: 100%; }
 .portrait img, .portrait canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 6px; }
@@ -197,9 +205,9 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
     <div>
       <h1>Devadharshini Ayyappan</h1>
       <p class="role">PhD student, Electrical Engineering, North Carolina State University</p>
-      <p>I work on physically grounded 3D and 4D reconstruction. I want to recover how deformable and articulated objects look, how they move, and what they are made of. My work combines Gaussian splatting, differentiable physics simulation, and multi-view sensing hardware.</p>
-      <p>I am advised by Prof. Edgar Lobaton in the ARoS Lab. Before my PhD I spent three years as a software engineer at Bosch.</p>
-      <p>I am open to industry research and engineering roles in 3D reconstruction and computer vision.</p>
+      <p>My research interests are in <strong>physically grounded 3D and 4D reconstruction</strong>. I want to recover how deformable and articulated objects look, how they move, and what they are made of, using Gaussian splatting and differentiable physics simulation. I am also interested in <strong>world models</strong> and <strong>physical AI for robotics</strong>.</p>
+      <p>I am advised by Prof. Edgar Lobaton in the ARoS Lab.</p>
+      <p class="open-to"><span class="dot" aria-hidden="true"></span><span><strong>Open to 2027 research internships</strong> and <strong>research collaborations</strong>. <a href="assets/Devadharshini_Ayyappan_CV.pdf" target="_blank" rel="noopener">View CV</a></span></p>
       <div class="links">
         <a href="assets/Devadharshini_Ayyappan_CV.pdf" target="_blank" rel="noopener">CV</a>
         <a href="https://scholar.google.com/citations?user=ZP6H1J8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
