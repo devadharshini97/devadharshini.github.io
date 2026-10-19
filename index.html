@@ -18,7 +18,8 @@
   --muted: #5A6672;       /* secondary text */
   --rule: #DDE3E8;        /* hairlines */
   --accent: #1D5F8F;      /* deep water blue: links */
-  --mark: #E9EFF4;        /* row hover / chips */
+  --mark: #E9EFF4;
+  --card: #FFFFFF;        /* row hover / chips */
   --warm: #B4652A;        /* date stamps, used sparingly */
   --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
@@ -27,12 +28,12 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --warm: #E3A06B;
+    --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --warm: #E3A06B;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --warm: #E3A06B;
+  --bg: #11161B; --fg: #E4E9EE; --muted: #97A3AF; --rule: #26303A; --accent: #8DC0E6; --mark: #1A222A; --card: #161D24; --warm: #E3A06B;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -139,9 +140,27 @@ h2 {
 .xp .when { color: var(--muted); font-size: var(--step--1); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 .xp .what { grid-column: 1 / -1; color: var(--muted); font-size: var(--step--1); }
 
+/* project cards: gallery grid, image on top (distinct from research rows) */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.card { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--card); display: flex; flex-direction: column; transition: border-color 150ms; }
+.card:hover { border-color: var(--muted); }
+.shot { position: relative; aspect-ratio: 4 / 3; background: var(--mark); overflow: hidden; }
+.shot img, .shot video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shot video { opacity: 0; transition: opacity 200ms; }
+.card:hover .shot video.ready { opacity: 1; }
+.card .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card h3 { font-size: 0.92rem; font-weight: 600; margin: 0; line-height: 1.35; }
+.card h3 a { color: var(--fg); }
+.card p { margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+.tags { list-style: none; margin: auto 0 0; padding: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-size: 0.72rem; font-weight: 500; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 7px; }
+@media (prefers-reduced-motion: reduce) { .card, .shot video { transition: none; } }
+
 footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var(--muted); font-size: 0.78rem; }
 
 @media (max-width: 720px) {
+  .cards { grid-template-columns: 1fr; }
   .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 36px; }
   .hero .portrait { order: -1; width: 168px; }
   .portrait figcaption { display: none; }
@@ -282,26 +301,43 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
 
   <section id="projects" aria-labelledby="h-proj">
     <h2 id="h-proj">Projects</h2>
-    <div class="rows">
-      <article class="row">
-        <div class="thumb"><img src="assets/thumbs/sim2cloud.svg" alt="Pipeline from photo to mesh to rendered frames to cloud" loading="lazy"></div>
-        <div>
-          <h3><a href="https://github.com/devadharshini97/AIMD-Sim-to-Cloud" target="_blank" rel="noopener">Automated Sim-to-Cloud Pipeline for 3D Assets</a></h3>
-          <p class="venue">SAM3D · Isaac Sim Replicator · AWS SageMaker · GitHub Actions</p>
-          <p class="desc">Reconstructs meshes from single images with SAM3D, renders synthetic datasets in Isaac Sim, and runs YOLOv8 inference on SageMaker with S3 storage. Deployment and data sync run through GitHub Actions.</p>
-          <div class="lk"><a href="https://github.com/devadharshini97/AIMD-Sim-to-Cloud" target="_blank" rel="noopener">Code</a></div>
+    <div class="cards">
+      <article class="card">
+        <div class="shot"><img src="assets/thumbs/sim2cloud.jpg" alt="Isaac Sim render with YOLOv8 boxes around a teddy bear and a sofa" loading="lazy"></div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/AIMD-Sim-to-Cloud" target="_blank" rel="noopener">Automated Sim-to-Cloud Pipeline</a></h3>
+          <p>Single-image meshes from SAM3D, synthetic renders in Isaac Sim, and YOLOv8 inference on SageMaker, deployed through GitHub Actions.</p>
+          <ul class="tags"><li>Isaac Sim</li><li>SAM3D</li><li>AWS SageMaker</li></ul>
         </div>
       </article>
-      <article class="row">
-        <div class="thumb">
+      <article class="card">
+        <div class="shot">
           <img src="assets/thumbs/tumor.jpg" alt="3D point rendering of a segmented brain tumor" loading="lazy">
           <video src="assets/media/tumor.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
         </div>
-        <div>
-          <h3><a href="https://github.com/devadharshini97/3D_Brain_Tumor_Segmentation" target="_blank" rel="noopener">3D Brain Tumor Segmentation with UNETR</a></h3>
-          <p class="venue">UNETR · MONAI · PyTorch · Open3D</p>
-          <p class="desc">Volumetric segmentation on BraTS 2021 with a ViT encoder and U-Net decoder, with predictions rendered in 3D.</p>
-          <div class="lk"><a href="https://github.com/devadharshini97/3D_Brain_Tumor_Segmentation" target="_blank" rel="noopener">Code</a></div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/3D_Brain_Tumor_Segmentation" target="_blank" rel="noopener">3D Brain Tumor Segmentation</a></h3>
+          <p>Volumetric segmentation on BraTS 2021 with UNETR (ViT encoder, U-Net decoder), with predictions rendered as 3D point clouds.</p>
+          <ul class="tags"><li>UNETR</li><li>MONAI</li><li>Open3D</li></ul>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/thumbs/metrology.svg" alt="Box in three-point perspective with lines running to three vanishing points" loading="lazy"></div>
+        <div class="body">
+          <h3>Single View Metrology</h3>
+          <p>Implementation of Criminisi et al. (ICCV 1999): vanishing points from annotated lines, projection and plane homographies, and a textured 3D model from one photo.</p>
+          <ul class="tags"><li>Projective geometry</li><li>Homography</li><li>Blender</li></ul>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <img src="assets/thumbs/galaxian.jpg" alt="Galaxian game scene with alien formation above a cratered planet" loading="lazy">
+          <video src="assets/media/galaxian.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/Galaxian-Game-computer-graphics-" target="_blank" rel="noopener">Galaxian in WebGL</a></h3>
+          <p>A 3D take on the arcade game with perspective projection, texture mapping, GLSL shaders, and animated enemy formations.</p>
+          <ul class="tags"><li>WebGL</li><li>GLSL</li><li>JavaScript</li></ul>
         </div>
       </article>
     </div>
@@ -335,7 +371,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
   });
 
   // Hover-to-play thumbnails
-  document.querySelectorAll('.row').forEach(function (row) {
+  document.querySelectorAll('.row, .card').forEach(function (row) {
     var v = row.querySelector('video'); if (!v) return;
     v.addEventListener('playing', function () { v.classList.add('ready'); });
     row.addEventListener('mouseenter', function () { v.play().catch(function () {}); });
