@@ -182,8 +182,8 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
       <li><a href="#about">About</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#research">Research</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
     </ul>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch color theme">
@@ -287,18 +287,6 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
     </ul>
   </section>
 
-  <section id="experience" aria-labelledby="h-xp">
-    <h2 id="h-xp">Experience</h2>
-    <ul class="xp">
-      <li><span class="org">Dolby Laboratories <span style="font-weight:400;color:var(--muted)">· Research Intern</span></span><span class="when">May – Aug 2026</span><span class="what">Non-rigid multi-part triplane Gaussian splatting; synthetic deformable dataset in Blender.</span></li>
-      <li><span class="org">ARoS Lab, NC State <span style="font-weight:400;color:var(--muted)">· Graduate Research Assistant</span></span><span class="when">Apr 2023 – now</span><span class="what">Differentiable physics, NeRF and Gaussian splatting reconstruction, VGGT fine-tuning, Isaac Sim data generation, sensing rigs.</span></li>
-      <li><span class="org">Mithril Defense <span style="font-weight:400;color:var(--muted)">· 3D Reconstruction Intern</span></span><span class="when">May – Aug 2025</span><span class="what">LiDAR–fisheye calibration, Gaussian splatting in Unreal Engine, Marching Cubes meshing from LiDAR.</span></li>
-      <li><span class="org">Robotics88 <span style="font-weight:400;color:var(--muted)">· Computer Vision Co-op</span></span><span class="when">Feb – May 2024</span><span class="what">Real-time camera–LiDAR fusion for drones (Livox Mid-360, ROS); YOLOv8 and YOLO-World benchmarks.</span></li>
-      <li><span class="org">USDA ARS <span style="font-weight:400;color:var(--muted)">· Machine Learning Intern</span></span><span class="when">May – Jul 2023</span><span class="what">LLM and vector-database interface for querying wheat pan-genomes.</span></li>
-      <li><span class="org">Robert Bosch <span style="font-weight:400;color:var(--muted)">· Software Engineer</span></span><span class="when">Sep 2019 – Jul 2022</span><span class="what">Automated software analyzers (30% efficiency gain); powertrain embedded software and HIL testing.</span></li>
-    </ul>
-  </section>
-
   <section id="projects" aria-labelledby="h-proj">
     <h2 id="h-proj">Projects</h2>
     <div class="cards">
@@ -322,9 +310,9 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
         </div>
       </article>
       <article class="card">
-        <div class="shot"><img src="assets/thumbs/metrology.svg" alt="Box in three-point perspective with lines running to three vanishing points" loading="lazy"></div>
+        <div class="shot"><img src="assets/thumbs/metrology.jpg" alt="Photo of a cardboard box with its edges annotated in three colors" loading="lazy"></div>
         <div class="body">
-          <h3>Single View Metrology</h3>
+          <h3><a href="https://github.com/devadharshini97/Single-View-Metrology" target="_blank" rel="noopener">Single View Metrology</a></h3>
           <p>Implementation of Criminisi et al. (ICCV 1999): vanishing points from annotated lines, projection and plane homographies, and a textured 3D model from one photo.</p>
           <ul class="tags"><li>Projective geometry</li><li>Homography</li><li>Blender</li></ul>
         </div>
@@ -340,7 +328,59 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
           <ul class="tags"><li>WebGL</li><li>GLSL</li><li>JavaScript</li></ul>
         </div>
       </article>
+      <article class="card">
+        <div class="shot">
+          <img src="assets/thumbs/deepfake.jpg" alt="Embedding clusters of real and fake faces before and after triplet training" loading="lazy">
+        </div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/Deepfake-Detection-Model" target="_blank" rel="noopener">Deepfake Video Detection</a></h3>
+          <p>MTCNN face crops and FaceNet embeddings trained with semi-hard triplet loss on Celeb-DF, compared against XceptionNet. Reached 87% test accuracy.</p>
+          <ul class="tags"><li>FaceNet</li><li>Triplet loss</li><li>TensorFlow</li></ul>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <img src="assets/thumbs/camsec.jpg" alt="AWS architecture diagram for a cloud camera security system" loading="lazy">
+        </div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/Cloud-based-Camera-Security-System" target="_blank" rel="noopener">Cloud-Based Camera Security System</a></h3>
+          <p>Surveillance storage and threat alerts on AWS: Rekognition for detection, S3 storage, SES alerts, and EKS with horizontal pod autoscaling, load-tested with Locust.</p>
+          <ul class="tags"><li>AWS</li><li>Kubernetes</li><li>Rekognition</li></ul>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <img src="assets/thumbs/cvae.jpg" alt="Grid of faces generated by a conditional VAE" loading="lazy">
+        </div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/Conditional_variational_AutoEncoder" target="_blank" rel="noopener">Conditional VAE Face Editing</a></h3>
+          <p>A CVAE on CelebA conditioned on 40 face attributes. Edits attributes such as smile and mustache, and morphs faces by interpolating latent means.</p>
+          <ul class="tags"><li>PyTorch</li><li>CVAE</li><li>CelebA</li></ul>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot">
+          <img src="assets/thumbs/dcgan.jpg" alt="Grid of generated digits interpolating between classes" loading="lazy">
+        </div>
+        <div class="body">
+          <h3><a href="https://github.com/devadharshini97/Conditional-DC-GANs" target="_blank" rel="noopener">Conditional DCGAN</a></h3>
+          <p>Class-conditional generator and discriminator on MNIST, with interpolation between digit classes in the conditioning space.</p>
+          <ul class="tags"><li>PyTorch</li><li>GANs</li><li>MNIST</li></ul>
+        </div>
+      </article>
     </div>
+  </section>
+
+  <section id="experience" aria-labelledby="h-xp">
+    <h2 id="h-xp">Experience</h2>
+    <ul class="xp">
+      <li><span class="org">Dolby Laboratories <span style="font-weight:400;color:var(--muted)">· Research Intern</span></span><span class="when">May – Aug 2026</span><span class="what">Non-rigid multi-part triplane Gaussian splatting; synthetic deformable dataset in Blender.</span></li>
+      <li><span class="org">ARoS Lab, NC State <span style="font-weight:400;color:var(--muted)">· Graduate Research Assistant</span></span><span class="when">Apr 2023 – now</span><span class="what">Differentiable physics, NeRF and Gaussian splatting reconstruction, VGGT fine-tuning, Isaac Sim data generation, sensing rigs.</span></li>
+      <li><span class="org">Mithril Defense <span style="font-weight:400;color:var(--muted)">· 3D Reconstruction Intern</span></span><span class="when">May – Aug 2025</span><span class="what">LiDAR–fisheye calibration, Gaussian splatting in Unreal Engine, Marching Cubes meshing from LiDAR.</span></li>
+      <li><span class="org">Robotics88 <span style="font-weight:400;color:var(--muted)">· Computer Vision Co-op</span></span><span class="when">Feb – May 2024</span><span class="what">Real-time camera–LiDAR fusion for drones (Livox Mid-360, ROS); YOLOv8 and YOLO-World benchmarks.</span></li>
+      <li><span class="org">USDA ARS <span style="font-weight:400;color:var(--muted)">· Machine Learning Intern</span></span><span class="when">May – Jul 2023</span><span class="what">LLM and vector-database interface for querying wheat pan-genomes.</span></li>
+      <li><span class="org">Robert Bosch <span style="font-weight:400;color:var(--muted)">· Software Engineer</span></span><span class="when">Sep 2019 – Jul 2022</span><span class="what">Automated software analyzers (30% efficiency gain); powertrain embedded software and HIL testing.</span></li>
+    </ul>
   </section>
 
   <section id="education" aria-labelledby="h-edu">
@@ -386,7 +426,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 22px 40px; color: var
         if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
-    ['about', 'news', 'research', 'experience', 'projects', 'education'].forEach(function (id) {
+    ['about', 'news', 'research', 'projects', 'experience', 'education'].forEach(function (id) {
       var el = document.getElementById(id); if (el) io.observe(el);
     });
   }
